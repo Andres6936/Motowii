@@ -3,13 +3,14 @@
 
 import type {IncomingMessage} from "http";
 import type {RequestOptions} from 'https'
+import type {Event, Context, Response} from "./scaleway";
 import * as https from 'https'
 
 const KEY = "wXCoG1w9T95RtaLt22o6rKUTi93h4HYFqr2jZJVAVLCghI8QNmRjSiCIxEGsaGmg"
 const HOSTNAME = 'data.mongodb-api.com'
 const PATHNAME = "/app/data-nhnyh/endpoint/data/v1/action/findOne"
 
-export async function handle<T, U, J>(event: T, context: U, cb: J) {
+export async function handle(event: Event, context: Context): Promise<Response> {
     const response = await post(HOSTNAME, PATHNAME, {
         "collection": "Users",
         "database": "Motowii",
@@ -23,7 +24,6 @@ export async function handle<T, U, J>(event: T, context: U, cb: J) {
             body: {
                 context: context,
                 event: event,
-                cb: cb,
             },
             statusCode: 200
         },
@@ -68,5 +68,5 @@ async function post<T, U>(hostname: string, path: string, data: T): Promise<U> {
 
 // Handle Execution
 (async () => {
-    await handle({}, {}, {});
+    await handle({} as never, {} as never);
 })();
