@@ -1,7 +1,8 @@
 {
+    "type": "module",
     "scripts": {
-        "start": "ncc build index.ts -m && ncc run ./dist/index.js",
-        "compile": "ncc build index.ts -m"
+        "start": "yarn compile && ncc run ./dist/index.js",
+        "compile": "ncc build index.ts -m -e https"
     },
     "devDependencies": {
         "@types/node": "^18.11.18",
