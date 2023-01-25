@@ -1,22 +1,27 @@
 // For minify the file for deploy in serveless see:
 // https://www.npmjs.com/package/@vercel/ncc
 
-import type {IncomingMessage} from "http";
-import type {RequestOptions} from 'https'
 import type {Event, Context, Response} from "./scaleway";
-import * as https from 'https'
+import {ControllerMongo} from "./ControllerMongo";
 
-const KEY = "wXCoG1w9T95RtaLt22o6rKUTi93h4HYFqr2jZJVAVLCghI8QNmRjSiCIxEGsaGmg"
-const HOSTNAME = 'data.mongodb-api.com'
-const PATHNAME = "/app/data-nhnyh/endpoint/data/v1/action/findOne"
+interface Payload {
+    TypeEvent: "CREATE_USER" | "READ_USER" | "DELETE_USER" | "UPDATE_USER",
+    ScopeEvent: "READ_ALL" | "READ_BY_ID"
+}
 
 export async function handle(event: Event, context: Context): Promise<Response> {
-    const response = await post(HOSTNAME, PATHNAME, {
-        "collection": "Users",
-        "database": "Motowii",
-        "dataSource": "Motowii"
-    });
-    console.log(response, 'Response Handle')
+    const payload = JSON.stringify(event.body) as Partial<Payload>;
+
+    if (payload?.TypeEvent === "CREATE_USER") {
+
+    } else if (payload.TypeEvent === "READ_USER") {
+        const response = await ControllerMongo.readAll();
+        console.log(response, 'Response Handle')
+    } else if (payload.TypeEvent === "DELETE_USER") {
+
+    } else if (payload.TypeEvent === "UPDATE_USER") {
+
+    }
 
     return {
         body: {
@@ -31,42 +36,12 @@ export async function handle(event: Event, context: Context): Promise<Response> 
     };
 }
 
-async function post<T, U>(hostname: string, path: string, data: T): Promise<U> {
-    return new Promise<U>(async (resolve, reject) => {
-        const options: RequestOptions = {
-            hostname: hostname,
-            path: path,
-            method: 'POST',
-            headers: {
-                'Access-Control-Request-Headers': '*',
-                'Content-Type': 'application/json',
-                'api-key': KEY,
-            }
-        };
-
-        const body: Uint8Array[] = [];
-
-        const req = https.request(options, (res: IncomingMessage) => {
-            // console.log('httpsPost statusCode:', res.statusCode);
-            // console.log('httpsPost headers:', res.headers);
-
-            res.on('data', d => {
-                body.push(d);
-            });
-            res.on('end', () => {
-                resolve(JSON.parse(Buffer.concat(body).toString()));
-            });
-        });
-        req.on('error', e => {
-            reject(e);
-        });
-
-        req.write(JSON.stringify(data));
-        req.end();
-    });
-}
 
 // Handle Execution
 (async () => {
-    await handle({} as never, {} as never);
+    await handle({
+        body: JSON.stringify({
+            TypeEvent: "READ_USER"
+        } as Payload)
+    } as Event, {} as Context);
 })();

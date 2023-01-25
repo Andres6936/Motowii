@@ -1,6 +1,7 @@
 {
     "scripts": {
-        "start": "ncc build index.ts && ncc run ./dist/index.js"
+        "start": "ncc build index.ts -m && ncc run ./dist/index.js",
+        "compile": "ncc build index.ts -m"
     },
     "devDependencies": {
         "@types/node": "^18.11.18",
