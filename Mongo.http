@@ -8,3 +8,13 @@ Content-Type: application/json
     "database":"Motowii",
     "dataSource":"Motowii"
 }
+
+###
+POST https://motowiigesko9bo-crud.functions.fnc.fr-par.scw.cloud
+Content-Type: application/json
+
+{
+  "isBase64Encoded": false,
+  "body": "Test",
+  "statusCode": 200
+}

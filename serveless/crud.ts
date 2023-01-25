@@ -5,11 +5,17 @@ import type {IncomingMessage} from "http";
 import type {RequestOptions} from 'https'
 import * as https from 'https'
 
-const URL = 'https://data.mongodb-api.com/app/data-nhnyh/endpoint/data/v1/action/findOne'
+const KEY = "wXCoG1w9T95RtaLt22o6rKUTi93h4HYFqr2jZJVAVLCghI8QNmRjSiCIxEGsaGmg"
+const HOSTNAME = 'data.mongodb-api.com'
+const PATHNAME = "/app/data-nhnyh/endpoint/data/v1/action/findOne"
 
-export async function handle<T, U, J> (event: T, context: U, cb: J) {
-    const response = await post('', '', {});
-    console.log(response)
+export async function handle<T, U, J>(event: T, context: U, cb: J) {
+    const response = await post(HOSTNAME, PATHNAME, {
+        "collection": "Users",
+        "database": "Motowii",
+        "dataSource": "Motowii"
+    });
+    console.log(response, 'Response Handle')
 
     return {
         body: {
@@ -30,35 +36,36 @@ async function post<T, U>(hostname: string, path: string, data: T): Promise<U> {
         const options: RequestOptions = {
             hostname: hostname,
             path: path,
-            port: 443,
             method: 'POST',
             headers: {
+                'Access-Control-Request-Headers': '*',
                 'Content-Type': 'application/json',
+                'api-key': KEY,
             }
         };
 
-        const body = [];
+        const body: Uint8Array[] = [];
 
         const req = https.request(options, (res: IncomingMessage) => {
             // console.log('httpsPost statusCode:', res.statusCode);
             // console.log('httpsPost headers:', res.headers);
 
-            res.on('data', d=> {
+            res.on('data', d => {
+                console.log('Data Buffer: ', d)
                 body.push(d);
             });
             res.on('end', () => {
-                // console.log(`httpsPost data: ${body}`);
-                // resolve(JSON.parse(Buffer.concat(body).toString()));
-                resolve("{'name': 'jason'}" as U);
+                console.log(`Post Payload: ${body}`);
+                resolve(JSON.parse(Buffer.concat(body).toString()));
             });
         });
         req.on('error', e => {
             // console.log(`ERROR httpsPost: ${e}`);
             reject(e);
         });
+
         req.write(JSON.stringify(data));
         req.end();
-
     });
 }
 
