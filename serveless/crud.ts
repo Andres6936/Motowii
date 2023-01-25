@@ -51,16 +51,13 @@ async function post<T, U>(hostname: string, path: string, data: T): Promise<U> {
             // console.log('httpsPost headers:', res.headers);
 
             res.on('data', d => {
-                console.log('Data Buffer: ', d)
                 body.push(d);
             });
             res.on('end', () => {
-                console.log(`Post Payload: ${body}`);
                 resolve(JSON.parse(Buffer.concat(body).toString()));
             });
         });
         req.on('error', e => {
-            // console.log(`ERROR httpsPost: ${e}`);
             reject(e);
         });
 
