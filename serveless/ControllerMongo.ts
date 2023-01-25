@@ -5,13 +5,13 @@ import * as https from 'https'
 export class ControllerMongo {
     private static readonly KEY = "wXCoG1w9T95RtaLt22o6rKUTi93h4HYFqr2jZJVAVLCghI8QNmRjSiCIxEGsaGmg"
     private static readonly HOSTNAME = 'data.mongodb-api.com'
-    private static readonly PATHNAME = "/app/data-nhnyh/endpoint/data/v1/action/findOne"
+    private static readonly PATHNAME = "/app/data-nhnyh/endpoint/data/v1/action/"
 
-    private static async post<T, U>(hostname: string, path: string, data: T): Promise<U> {
+    private static async post<T, U>(action: string, data: T): Promise<U> {
         return new Promise<U>(async (resolve, reject) => {
             const options: RequestOptions = {
-                hostname: hostname,
-                path: path,
+                hostname: this.HOSTNAME,
+                path: this.PATHNAME + action,
                 method: 'POST',
                 headers: {
                     'Access-Control-Request-Headers': '*',
@@ -42,11 +42,60 @@ export class ControllerMongo {
         });
     }
 
-    public static async readAll() {
-        return await ControllerMongo.post(this.HOSTNAME, this.PATHNAME, {
+    public static async create() {
+        return await ControllerMongo.post("inserOne", {
             "collection": "Users",
             "database": "Motowii",
-            "dataSource": "Motowii"
+            "dataSource": "Motowii",
+            "document": {
+                "email": "",
+                "username": "",
+                "password": ""
+            }
+        });
+    }
+
+    public static async readAll() {
+        return await ControllerMongo.post("find", {
+            "collection": "Users",
+            "database": "Motowii",
+            "dataSource": "Motowii",
+            "limit": 15,
+        });
+    }
+
+    public static async readByUsername(username: string) {
+        return await ControllerMongo.post("findOne", {
+            "collection": "Users",
+            "database": "Motowii",
+            "dataSource": "Motowii",
+            "filter": {
+                "username": username
+            }
+        });
+    }
+
+    public static async updateById() {
+        return await ControllerMongo.post("updateOne", {
+            "collection": "Users",
+            "database": "Motowii",
+            "dataSource": "Motowii",
+            "filter": {"_id": {"$oid": "6193ebd53821e5ec5b4f6c3b"}},
+            "update": {
+                "$set": {
+                    "status": "complete",
+                    "completedAt": {"$date": {"$numberLong": "1637083942954"}}
+                }
+            }
+        });
+    }
+
+    public static async deleteById() {
+        return await ControllerMongo.post("deleteOne", {
+            "collection": "Users",
+            "database": "Motowii",
+            "dataSource": "Motowii",
+            "filter": {"_id": {"$oid": "6193ebd53821e5ec5b4f6c3b"}}
         });
     }
 }
