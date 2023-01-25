@@ -43,7 +43,7 @@ export class ControllerMongo {
     }
 
     public static async create() {
-        return await ControllerMongo.post("inserOne", {
+        return await this.post("inserOne", {
             "collection": "Users",
             "database": "Motowii",
             "dataSource": "Motowii",
@@ -56,7 +56,7 @@ export class ControllerMongo {
     }
 
     public static async readAll() {
-        return await ControllerMongo.post("find", {
+        return await this.post("find", {
             "collection": "Users",
             "database": "Motowii",
             "dataSource": "Motowii",
@@ -65,7 +65,7 @@ export class ControllerMongo {
     }
 
     public static async readByUsername(username: string) {
-        return await ControllerMongo.post("findOne", {
+        return await this.post("findOne", {
             "collection": "Users",
             "database": "Motowii",
             "dataSource": "Motowii",
@@ -75,12 +75,12 @@ export class ControllerMongo {
         });
     }
 
-    public static async updateById() {
-        return await ControllerMongo.post("updateOne", {
+    public static async updateById(id: string) {
+        return await this.post("updateOne", {
             "collection": "Users",
             "database": "Motowii",
             "dataSource": "Motowii",
-            "filter": {"_id": {"$oid": "6193ebd53821e5ec5b4f6c3b"}},
+            "filter": {"_id": {"$oid": id}},
             "update": {
                 "$set": {
                     "status": "complete",
@@ -90,12 +90,12 @@ export class ControllerMongo {
         });
     }
 
-    public static async deleteById() {
-        return await ControllerMongo.post("deleteOne", {
+    public static async deleteById(id: string) {
+        return await this.post("deleteOne", {
             "collection": "Users",
             "database": "Motowii",
             "dataSource": "Motowii",
-            "filter": {"_id": {"$oid": "6193ebd53821e5ec5b4f6c3b"}}
+            "filter": {"_id": {"$oid": id}}
         });
     }
 }
