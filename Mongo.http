@@ -1,0 +1,10 @@
+POST https://data.mongodb-api.com/app/data-nhnyh/endpoint/data/v1/action/findOne
+Access-Control-Request-Headers: *
+api-key: wXCoG1w9T95RtaLt22o6rKUTi93h4HYFqr2jZJVAVLCghI8QNmRjSiCIxEGsaGmg
+Content-Type: application/json
+
+{
+    "collection":"Users",
+    "database":"Motowii",
+    "dataSource":"Motowii"
+}
