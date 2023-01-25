@@ -21,21 +21,36 @@ export default function App() {
     const [isEmptyPassword, setIsEmptyPassword] = useState<boolean>(false);
     const [passwordNotMatch, setPasswordNotMatch] = useState<boolean>(false);
 
-    const onHandleRegister = () => {
+    const isCorrectForm = () => {
+        // Assumption of that all the inputs are correct
+        let correct = true;
+
         if (username === "") {
             setIsEmptyUsername(true);
+            correct = false;
         }
 
         if (email === "") {
             setIsEmptyEmail(true);
+            correct = false;
         }
 
         if (password === "") {
             setIsEmptyPassword(true);
+            correct = false;
         }
 
         if (password !== confirmPassword) {
             setPasswordNotMatch(true);
+            correct = false;
+        }
+
+        return correct;
+    }
+
+    const onHandleRegister = () => {
+        if (isCorrectForm()) {
+
         }
     }
 
