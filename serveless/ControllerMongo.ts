@@ -2,13 +2,17 @@ import type {IncomingMessage} from "http";
 import type {RequestOptions} from 'https'
 import * as https from 'node:https'
 
+interface ResponseMongo<T> {
+    documents?: T[]
+}
+
 export class ControllerMongo {
     private static readonly KEY = "wXCoG1w9T95RtaLt22o6rKUTi93h4HYFqr2jZJVAVLCghI8QNmRjSiCIxEGsaGmg"
     private static readonly HOSTNAME = 'data.mongodb-api.com'
     private static readonly PATHNAME = "/app/data-nhnyh/endpoint/data/v1/action/"
 
-    private static async post<T extends object, U extends object>(action: string, data: T): Promise<U> {
-        return new Promise<U>(async (resolve, reject) => {
+    private static async post<T extends object>(action: string, data: T): Promise<ResponseMongo<object>> {
+        return new Promise<ResponseMongo<object>>(async (resolve, reject) => {
             const options: RequestOptions = {
                 hostname: this.HOSTNAME,
                 path: this.PATHNAME + action,

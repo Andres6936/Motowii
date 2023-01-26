@@ -23,7 +23,7 @@ export async function handle(event: Event, context: Context): Promise<Response> 
         return wrapperResponse({
             isBase64Encoded: false,
             statusCode: 200,
-            body: response,
+            body: response?.documents,
         })
     } else if (payload?.TypeEvent === "DELETE_USER") {
         return wrapperResponse({
