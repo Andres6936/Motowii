@@ -2,7 +2,7 @@
     "type": "module",
     "scripts": {
         "start": "yarn compile && ncc run ./dist/index.js",
-        "compile": "ncc build index.ts -m -e https"
+        "compile": "ncc build index.ts -m"
     },
     "devDependencies": {
         "@types/node": "^18.11.18",

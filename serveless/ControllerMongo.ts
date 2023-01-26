@@ -1,6 +1,6 @@
 import type {IncomingMessage} from "http";
 import type {RequestOptions} from 'https'
-import * as https from 'https'
+import * as https from 'node:https'
 
 export class ControllerMongo {
     private static readonly KEY = "wXCoG1w9T95RtaLt22o6rKUTi93h4HYFqr2jZJVAVLCghI8QNmRjSiCIxEGsaGmg"
