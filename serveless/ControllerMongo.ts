@@ -7,7 +7,7 @@ export class ControllerMongo {
     private static readonly HOSTNAME = 'data.mongodb-api.com'
     private static readonly PATHNAME = "/app/data-nhnyh/endpoint/data/v1/action/"
 
-    private static async post<T, U>(action: string, data: T): Promise<U> {
+    private static async post<T extends object, U extends object>(action: string, data: T): Promise<U> {
         return new Promise<U>(async (resolve, reject) => {
             const options: RequestOptions = {
                 hostname: this.HOSTNAME,
