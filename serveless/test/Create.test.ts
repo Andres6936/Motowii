@@ -5,8 +5,7 @@ import {handle, Payload} from "../index";
 test('Read all users in database', async () => {
     const response: Response = await handle({
         body: JSON.stringify({
-            TypeEvent: "READ_USER",
-            ScopeEvent: "READ_ALL"
+            TypeEvent: "CREATE_USER",
         } as Payload)
     } as Event, {} as Context);
 
