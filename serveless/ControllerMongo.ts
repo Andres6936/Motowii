@@ -2,6 +2,12 @@ import type {IncomingMessage} from "http";
 import type {RequestOptions} from 'https'
 import * as https from 'node:https'
 
+interface User {
+    username: string,
+    password: string,
+    email: string
+}
+
 interface ResponseMongo<T> {
     documents?: T[]
 }
@@ -46,15 +52,15 @@ export class ControllerMongo {
         });
     }
 
-    public static async create() {
+    public static async create(user: User) {
         return await this.post("inserOne", {
             "collection": "Users",
             "database": "Motowii",
             "dataSource": "Motowii",
             "document": {
-                "email": "",
-                "username": "",
-                "password": ""
+                "email": user.email,
+                "username": user.username,
+                "password": user.password
             }
         });
     }
