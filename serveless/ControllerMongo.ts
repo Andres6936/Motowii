@@ -13,7 +13,7 @@ interface ResponseMongo<T> {
 }
 
 export class ControllerMongo {
-    private static readonly KEY = "wXCoG1w9T95RtaLt22o6rKUTi93h4HYFqr2jZJVAVLCghI8QNmRjSiCIxEGsaGmg"
+    private static readonly KEY = process.env.MONGO_DATA_API_KEY
     private static readonly HOSTNAME = 'data.mongodb-api.com'
     private static readonly PATHNAME = "/app/data-nhnyh/endpoint/data/v1/action/"
 
