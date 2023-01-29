@@ -4,7 +4,7 @@
 import type {Event, Context, Response} from "./scaleway";
 import {ControllerMongo} from "./ControllerMongo";
 
-interface Payload {
+export interface Payload {
     TypeEvent: "CREATE_USER" | "READ_USER" | "UPDATE_USER" | "DELETE_USER",
     ScopeEvent: "CREATE" | "READ_ALL" | "READ_BY_ID" | "UPDATE_BY_ID" | "DELETE_BY_ID"
 }

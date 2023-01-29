@@ -38,7 +38,7 @@ export interface RequestContext {
 // https://github.com/scaleway/scaleway-functions-runtimes/blob/master/handler/utils.go
 export interface Response {
     statusCode: number;
-    body?: string | object;
+    body?: string | object | object[];
     headers?: Record<string, string>;
     isBase64Encoded?: boolean;
 }

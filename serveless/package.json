@@ -2,11 +2,14 @@
     "type": "module",
     "scripts": {
         "start": "yarn compile && ncc run ./dist/index.js",
-        "compile": "ncc build index.ts -m"
+        "compile": "ncc build index.ts -m",
+        "test": "vitest",
+        "coverage": "vitest run --coverage"
     },
     "devDependencies": {
         "@types/node": "^18.11.18",
         "@vercel/ncc": "^0.36.0",
-        "typescript": "^4.9.4"
+        "typescript": "^4.9.4",
+        "vitest": "^0.28.3"
     }
 }
