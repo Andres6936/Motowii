@@ -1,5 +1,8 @@
 import {Button, Center, FormControl, Input, Link, Stack, Text, WarningOutlineIcon} from "native-base";
 import {useState} from "react";
+import {useNavigation} from "@react-navigation/native";
+import {RootParamList} from "../interfaces/RootParamList";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 
 export function SignUp() {
     const [email, setEmail] = useState<string>('');
@@ -10,6 +13,8 @@ export function SignUp() {
     const [isEmptyEmail, setIsEmptyEmail] = useState<boolean>(false);
     const [isEmptyPassword, setIsEmptyPassword] = useState<boolean>(false);
     const [passwordNotMatch, setPasswordNotMatch] = useState<boolean>(false);
+
+    const navigator = useNavigation<NativeStackNavigationProp<RootParamList>>();
 
     const isCorrectForm = () => {
         // Assumption of that all the inputs are correct
@@ -88,7 +93,7 @@ export function SignUp() {
                     </FormControl.ErrorMessage>
 
                     <Button onPress={onHandleRegister} mt={"10"}>Register</Button>
-                    <Link pt={"4"} mx={"auto"}>Already account</Link>
+                    <Link onPress={() => navigator.navigate("SignIn")} pt={"4"} mx={"auto"}>Already account</Link>
                 </Stack>
             </FormControl>
         </Center>
