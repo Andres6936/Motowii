@@ -2,8 +2,13 @@ import {Box, Button, HStack, IconButton, Input, Stack, Text, VStack} from "nativ
 import {MaterialIcons} from '@expo/vector-icons';
 import MapView from "react-native-maps";
 import React from "react";
+import {DrawerActions, useNavigation} from "@react-navigation/native";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
+import {RootParamList} from "../interfaces/RootParamList";
 
 export function Main() {
+    const navigator = useNavigation<NativeStackNavigationProp<RootParamList>>();
+
     return (
         <Stack safeArea={true} flex={1}>
             <Box position={"relative"} flex={2}>
@@ -14,6 +19,7 @@ export function Main() {
                 <IconButton bg={"white"} position={"absolute"} right={15} top={15}
                             icon={<MaterialIcons name="share" size={24} color="black"/>}/>
                 <IconButton bg={"white"} position={"absolute"} left={15} top={15}
+                            onPress={() => navigator.dispatch(DrawerActions.openDrawer())}
                             icon={<MaterialIcons name="dehaze" size={24} color="black"/>}/>
             </Box>
 
