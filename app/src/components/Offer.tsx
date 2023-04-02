@@ -10,12 +10,12 @@ interface Props {
 export function Offer(props: Props) {
     return (
         <HStack bg={"light.100"} borderRadius={10} borderColor={"gray.300"} py={2} px={4} borderWidth={1}
-                alignItems={"center"} space={1}>
+                alignItems={"center"} space={1} my={1}>
             <VStack flex={1} alignItems={"center"}>
                 <Avatar bg="cyan.500" source={{
                     uri: props.offer.photo
                 }}/>
-                <Text mt={2} bold>{props.offer.name}</Text>
+                <Text textAlign={"center"} mt={2} bold>{props.offer.name}</Text>
             </VStack>
             <HStack space={5} pl={4} flex={3}>
                 <VStack space={1}>

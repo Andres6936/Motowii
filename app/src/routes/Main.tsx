@@ -1,4 +1,4 @@
-import {Box, Button, HStack, IconButton, Input, Stack, Text, VStack} from "native-base";
+import {Box, Button, HStack, IconButton, Input, ScrollView, Stack, Text, VStack} from "native-base";
 import {MaterialIcons} from '@expo/vector-icons';
 import MapView from "react-native-maps";
 import React, {useState} from "react";
@@ -23,7 +23,11 @@ export function Main() {
 
     const renderOfferIfExist = () => {
         if (showOffers) {
-            return offers.map(offer => <Offer key={offer.serial} offer={offer}/>)
+            return (
+                <ScrollView>
+                    {offers.map(offer => <Offer key={offer.serial} offer={offer}/>)}
+                </ScrollView>
+            )
         } else {
             return (
                 <>
