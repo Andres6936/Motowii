@@ -1,13 +1,22 @@
 import {Box, Button, HStack, IconButton, Input, Stack, Text, VStack} from "native-base";
 import {MaterialIcons} from '@expo/vector-icons';
 import MapView from "react-native-maps";
-import React from "react";
+import React, {useState} from "react";
 import {DrawerActions, useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {RootParamList} from "../interfaces/RootParamList";
+import {FindService} from "../FindService";
 
 export function Main() {
     const navigator = useNavigation<NativeStackNavigationProp<RootParamList>>();
+    const [showOffers, setShowOffers] = useState(false);
+
+    const searchOffers = async () => {
+        const offers = await FindService.find();
+        if (offers.length > 0) {
+            setShowOffers(true);
+        }
+    }
 
     return (
         <Stack safeArea={true} flex={1}>
@@ -43,7 +52,7 @@ export function Main() {
                 </HStack>
                 <Input placeholder={"From"} variant={"rounded"}/>
                 <Input placeholder={"To"} variant={"rounded"}/>
-                <Button>Find a Motowii</Button>
+                <Button onPress={searchOffers}>Find a Motowii</Button>
             </VStack>
         </Stack>
     )
