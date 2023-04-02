@@ -1,4 +1,5 @@
-import {Avatar, Button, HStack, Text, VStack} from "native-base";
+import {Avatar, HStack, IconButton, Text, VStack} from "native-base";
+import {Ionicons} from '@expo/vector-icons';
 import React from "react";
 import {IOffer} from "../FindService";
 
@@ -16,17 +17,32 @@ export function Offer(props: Props) {
                 }}/>
                 <Text mt={2} bold>{props.offer.name}</Text>
             </VStack>
-            <VStack space={1} pl={4} flex={2}>
-                <VStack space={0}>
-                    <Text p={0} m={0}>Price:</Text>
-                    <Text p={0} m={0} lineHeight={26} fontSize={"2xl"} bold>${props.offer.price}</Text>
+            <HStack space={5} pl={4} flex={3}>
+                <VStack space={1}>
+                    <VStack space={0}>
+                        <Text p={0} m={0}>Price:</Text>
+                        <Text p={0} m={0} lineHeight={26} fontSize={"2xl"} bold>${props.offer.price}</Text>
+                    </VStack>
+                    <VStack>
+                        <Text p={0} m={0}>Time:</Text>
+                        <Text p={0} m={0} lineHeight={26} fontSize={"2xl"} bold>{props.offer.time} min.</Text>
+                    </VStack>
                 </VStack>
-                <VStack>
-                    <Text p={0} m={0}>Time:</Text>
-                    <Text p={0} m={0} lineHeight={26} fontSize={"2xl"} bold>{props.offer.time} min.</Text>
+                <VStack space={1}>
+                    <VStack>
+                        <Text p={0} m={0}>Model:</Text>
+                        <Text p={0} m={0} lineHeight={26} fontSize={"lg"}>Picanto</Text>
+                    </VStack>
+                    <VStack>
+                        <Text p={0} m={0}>Serial:</Text>
+                        <Text p={0} m={0} lineHeight={26} fontSize={"lg"}>VXC 784</Text>
+                    </VStack>
                 </VStack>
-            </VStack>
-            <Button flex={1}>Accept</Button>
+            </HStack>
+            <IconButton colorScheme={"tertiary"} borderRadius={"full"} size={"md"} variant="solid" _icon={{
+                as: Ionicons,
+                name: "ios-checkmark"
+            }}/>
         </HStack>
     )
 }
