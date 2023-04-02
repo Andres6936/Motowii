@@ -1,7 +1,16 @@
-import {DrawerContentComponentProps, DrawerContentScrollView, DrawerItemList} from "@react-navigation/drawer";
-import {Avatar, Box, Text, VStack} from "native-base";
+import {
+    DrawerContentComponentProps,
+    DrawerContentScrollView,
+    DrawerItemList,
+    DrawerNavigationProp
+} from "@react-navigation/drawer";
+import {Avatar, Box, Pressable, Text, VStack} from "native-base";
+import {DrawerActions, useNavigation} from "@react-navigation/native";
+import {RootParamList} from "../interfaces/RootParamList";
 
 export function CustomDrawer(props: DrawerContentComponentProps) {
+    const navigator = useNavigation<DrawerNavigationProp<RootParamList>>()
+
     return (
         <>
             <VStack justifyContent={"center"} safeArea={true}>
@@ -16,9 +25,13 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
                 <DrawerItemList {...props}/>
             </DrawerContentScrollView>
 
-            <Box justifyContent={"center"} p={5}>
-                <Text opacity={0.5} textAlign={"center"}>Close</Text>
-            </Box>
+            <Pressable onPress={() => navigator.dispatch(DrawerActions.closeDrawer)}>
+                <Box justifyContent={"center"} p={5}>
+                    <Text opacity={0.5} textAlign={"center"}>
+                        Close
+                    </Text>
+                </Box>
+            </Pressable>
         </>
 
     )
