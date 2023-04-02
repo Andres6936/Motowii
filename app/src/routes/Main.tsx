@@ -104,7 +104,7 @@ export function Main() {
                 {renderButtonCancelTrip()}
             </Box>
 
-            <VStack space={3} mx={3} py={3} flex={1}>
+            <VStack space={3} bg={"gray.200"} p={3} flex={1}>
                 {renderOfferIfExist()}
             </VStack>
         </Stack>
