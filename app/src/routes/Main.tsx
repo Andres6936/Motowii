@@ -21,6 +21,17 @@ export function Main() {
         }
     }
 
+    const renderButtonCancelTrip = () => {
+        if (showOffers) {
+            return (
+                <Button onPress={() => setShowOffers(false)} colorScheme={"secondary"}
+                        position={"absolute"} left={100} right={100} bottom={15}>
+                    Cancel Trip
+                </Button>
+            )
+        }
+    }
+
     const renderOfferIfExist = () => {
         if (showOffers) {
             return (
@@ -68,6 +79,8 @@ export function Main() {
                 <IconButton bg={"white"} position={"absolute"} left={15} top={15}
                             onPress={() => navigator.dispatch(DrawerActions.openDrawer())}
                             icon={<MaterialIcons name="dehaze" size={24} color="black"/>}/>
+
+                {renderButtonCancelTrip()}
             </Box>
 
             <VStack space={3} mx={3} py={3} flex={1}>
