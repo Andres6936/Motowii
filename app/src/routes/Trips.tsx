@@ -1,4 +1,5 @@
 import {Avatar, Divider, HStack, Text, VStack} from "native-base";
+import {MaterialIcons} from '@expo/vector-icons';
 
 export function Trips() {
     return (
@@ -29,7 +30,10 @@ export function Trips() {
                         </Avatar>
                         <VStack>
                             <Text>Madhumd H</Text>
-                            <Text>(4.9)</Text>
+                            <HStack space={2} alignItems={"center"}>
+                                <MaterialIcons name="star-rate" size={12} color="gold"/>
+                                <Text>(4.9)</Text>
+                            </HStack>
                         </VStack>
                     </HStack>
                     <VStack flex={1}>
