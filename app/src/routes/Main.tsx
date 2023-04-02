@@ -10,14 +10,22 @@ import {Offer} from "../components/Offer";
 
 export function Main() {
     const navigator = useNavigation<NativeStackNavigationProp<RootParamList>>();
-    const [showOffers, setShowOffers] = useState(false);
     const [offers, setOffers] = useState<IOffer[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [showOffers, setShowOffers] = useState<boolean>(false);
 
     const searchOffers = async () => {
-        const offers = await FindService.find();
-        if (offers.length > 0) {
-            setOffers(offers);
-            setShowOffers(true);
+        setIsLoading(true)
+        try {
+            const offers = await FindService.find();
+            if (offers.length > 0) {
+                setOffers(offers);
+                setShowOffers(true);
+            }
+        } catch (ignored) {
+
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -28,6 +36,18 @@ export function Main() {
                         position={"absolute"} left={100} right={100} bottom={15}>
                     Cancel Trip
                 </Button>
+            )
+        }
+    }
+
+    const renderButtonLoading = () => {
+        if (isLoading) {
+            return (
+                <Button disabled>Searching ....</Button>
+            )
+        } else {
+            return (
+                <Button onPress={searchOffers}>Find a Motowii</Button>
             )
         }
     }
@@ -61,7 +81,8 @@ export function Main() {
                     </HStack>
                     <Input placeholder={"From"} variant={"rounded"}/>
                     <Input placeholder={"To"} variant={"rounded"}/>
-                    <Button onPress={searchOffers}>Find a Motowii</Button>
+
+                    {renderButtonLoading()}
                 </>
             )
         }
