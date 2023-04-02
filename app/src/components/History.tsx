@@ -3,7 +3,7 @@ import {MaterialIcons} from "@expo/vector-icons";
 
 export function History() {
     return (
-        <VStack bg={"gray.50"} p={3} borderRadius={5} borderColor={"gray.300"} borderWidth={1}>
+        <VStack mt={1} mb={2} bg={"gray.50"} p={3} borderRadius={5} borderColor={"gray.300"} borderWidth={1}>
             <HStack justifyContent={"space-between"}>
                 <Text>Pickup point</Text>
                 <Text>7:15 AM</Text>
