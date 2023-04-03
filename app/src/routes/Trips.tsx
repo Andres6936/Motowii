@@ -14,7 +14,7 @@ export function Trips() {
                 <Pressable onPress={() => navigator.dispatch(DrawerActions.openDrawer)}>
                     <AntDesign name="left" size={24} color="black"/>
                 </Pressable>
-                <Text textAlign={"center"} flex={1}>History Trips</Text>
+                <Text fontSize={"lg"} textAlign={"center"} flex={1}>History Trips</Text>
             </HStack>
             <ScrollView>
                 <History/>

@@ -7,6 +7,7 @@ import {Main} from "./src/routes/Main";
 import {createDrawerNavigator} from "@react-navigation/drawer";
 import {CustomDrawer} from "./src/components/CustomDrawer";
 import {Trips} from "./src/routes/Trips";
+import {Payment} from "./src/routes/Payment";
 
 const Drawer = createDrawerNavigator();
 
@@ -17,7 +18,7 @@ function DrawerTab() {
         }} drawerContent={CustomDrawer}>
             <Drawer.Screen name={"Map"} component={Main}/>
             <Drawer.Screen name={"Trips"} component={Trips}/>
-            <Drawer.Screen name={"Payment"} component={Main}/>
+            <Drawer.Screen name={"Payment"} component={Payment}/>
             <Drawer.Screen name={"Notifications"} component={Main}/>
             <Drawer.Screen name={"Promos"} component={Main}/>
             <Drawer.Screen name={"Help"} component={Main}/>
