@@ -18,7 +18,7 @@ function HistoryTransaction() {
 
 function Card() {
     return (
-        <Box mt={2} mb={5} borderRadius={17} bg={"tertiary.500"} p={5}>
+        <Box flex={1} mt={2} mb={5} borderRadius={17} bg={"tertiary.500"} p={5}>
             <VStack>
                 <Text px={5} mb={5} color={"white"} fontSize={"2xl"} bold>Visa</Text>
                 <HStack justifyContent={"space-between"}>
@@ -53,7 +53,12 @@ export function Payment() {
                     <Text textAlign={"center"} opacity={.5}>Available Cash</Text>
                 </VStack>
                 <Text fontSize={"lg"} bold>Cards</Text>
-                <Card/>
+                <HStack space={2}>
+                    <Box mt={2}>
+                        <AntDesign name="plussquare" size={36} color="ligthgray"/>
+                    </Box>
+                    <Card/>
+                </HStack>
                 <Text mt={5} fontSize={"lg"} bold>History</Text>
                 <HistoryTransaction/>
                 <Divider/>
