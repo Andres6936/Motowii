@@ -3,7 +3,7 @@ import {FontAwesome5, MaterialCommunityIcons, MaterialIcons} from "@expo/vector-
 
 export function History() {
     return (
-        <VStack mt={1} mb={2} bg={"gray.50"} py={3} px={5} borderRadius={5} borderColor={"gray.300"} borderWidth={1}>
+        <VStack mt={1} mb={2} bg={"gray.50"} py={3} px={5} borderRadius={12} borderColor={"gray.300"} borderWidth={1}>
             <VStack>
                 <HStack alignItems={"center"} space={3}>
                     <MaterialCommunityIcons name="record-circle" size={24} color="green"/>
