@@ -59,13 +59,15 @@ export function Main() {
     const renderOfferIfExist = () => {
         if (showOffers) {
             return (
-                <ScrollView>
-                    {offers.map(offer => <Offer key={offer.serial} offer={offer}/>)}
-                </ScrollView>
+                <VStack position={"absolute"} h={"28%"} left={3} right={3} bottom={3} space={3}>
+                    <ScrollView>
+                        {offers.map(offer => <Offer key={offer.serial} offer={offer}/>)}
+                    </ScrollView>
+                </VStack>
             )
         } else {
             return (
-                <>
+                <VStack position={"absolute"} h={"28%"} left={3} right={3} bottom={3} space={3}>
                     <Box p={3} borderRadius={8} bg={"gray.200"}>
                         <VStack space={3}>
                             <Text opacity={.5}>Recent Trips</Text>
@@ -88,7 +90,7 @@ export function Main() {
                     </Box>
 
                     {renderButtonLoading()}
-                </>
+                </VStack>
             )
         }
     }
@@ -107,10 +109,7 @@ export function Main() {
                             icon={<MaterialIcons name="location-searching" size={24} color="black"/>}/>
 
                 {renderButtonCancelTrip()}
-
-                <VStack position={"absolute"} h={"28%"} left={3} right={3} bottom={3} space={3}>
-                    {renderOfferIfExist()}
-                </VStack>
+                {renderOfferIfExist()}
             </Box>
         </Stack>
     )
