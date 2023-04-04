@@ -5,11 +5,10 @@ import React, {useState} from "react";
 import {DrawerActions, useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {RootParamList} from "../interfaces/RootParamList";
-import {FindService, IOffer} from "../FindService";
+import {FindService} from "../FindService";
 
 export function Main() {
     const navigator = useNavigation<NativeStackNavigationProp<RootParamList>>();
-    const [offers, setOffers] = useState<IOffer[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [showOffers, setShowOffers] = useState<boolean>(false);
 
@@ -18,7 +17,6 @@ export function Main() {
         try {
             const offers = await FindService.find();
             if (offers.length > 0) {
-                setOffers(offers);
                 setShowOffers(true);
             }
         } catch (ignored) {
