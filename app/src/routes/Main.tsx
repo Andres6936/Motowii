@@ -43,11 +43,11 @@ export function Main() {
     const renderButtonLoading = () => {
         if (isLoading) {
             return (
-                <Button disabled>Searching ....</Button>
+                <Button size={"lg"} colorScheme={"tertiary"} disabled>Searching ....</Button>
             )
         } else {
             return (
-                <Button onPress={searchOffers}>Find a Motowii</Button>
+                <Button size={"lg"} colorScheme={"tertiary"} onPress={searchOffers}>Where you go?</Button>
             )
         }
     }
@@ -62,25 +62,27 @@ export function Main() {
         } else {
             return (
                 <>
-                    <HStack space={3}>
-                        <Box flex={1} px={3} py={5} borderRadius={5} borderColor={"gray.500"} borderWidth={1}>
-                            <Text>Ride</Text>
-                        </Box>
+                    <Box p={3} borderRadius={8} bg={"gray.200"}>
+                        <HStack space={3}>
+                            <Box flex={1} px={3} py={5} borderRadius={5} borderColor={"gray.500"} borderWidth={1}>
+                                <Text>Ride</Text>
+                            </Box>
 
-                        <Box flex={1} px={3} py={5} borderRadius={5} borderColor={"gray.500"} borderWidth={1}>
-                            <Text>Intercity</Text>
-                        </Box>
+                            <Box flex={1} px={3} py={5} borderRadius={5} borderColor={"gray.500"} borderWidth={1}>
+                                <Text>Intercity</Text>
+                            </Box>
 
-                        <Box flex={1} px={3} py={5} borderRadius={5} borderColor={"gray.500"} borderWidth={1}>
-                            <Text>Courier</Text>
-                        </Box>
+                            <Box flex={1} px={3} py={5} borderRadius={5} borderColor={"gray.500"} borderWidth={1}>
+                                <Text>Courier</Text>
+                            </Box>
 
-                        <Box flex={1} px={3} py={5} borderRadius={5} borderColor={"gray.500"} borderWidth={1}>
-                            <Text>Fleet</Text>
-                        </Box>
-                    </HStack>
-                    <Input placeholder={"From"} variant={"rounded"}/>
-                    <Input placeholder={"To"} variant={"rounded"}/>
+                            <Box flex={1} px={3} py={5} borderRadius={5} borderColor={"gray.500"} borderWidth={1}>
+                                <Text>Fleet</Text>
+                            </Box>
+                        </HStack>
+                        <Input placeholder={"From"} variant={"rounded"}/>
+                        <Input placeholder={"To"} variant={"rounded"}/>
+                    </Box>
 
                     {renderButtonLoading()}
                 </>
@@ -103,8 +105,7 @@ export function Main() {
 
                 {renderButtonCancelTrip()}
 
-                <VStack position={"absolute"} borderRadius={8} h={"35%"} p={3}
-                        left={2} right={2} bottom={2} space={3} bg={"gray.200"}>
+                <VStack position={"absolute"} h={"35%"} left={2} right={2} bottom={2} space={3}>
                     {renderOfferIfExist()}
                 </VStack>
             </Box>
