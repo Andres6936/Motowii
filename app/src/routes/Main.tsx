@@ -1,5 +1,5 @@
-import {Box, Button, IconButton, ScrollView, Stack, Text, VStack} from "native-base";
-import {MaterialIcons} from '@expo/vector-icons';
+import {Box, Button, HStack, IconButton, ScrollView, Stack, Text, VStack} from "native-base";
+import {FontAwesome, MaterialIcons} from '@expo/vector-icons';
 import MapView from "react-native-maps";
 import React, {useState} from "react";
 import {DrawerActions, useNavigation} from "@react-navigation/native";
@@ -70,12 +70,19 @@ export function Main() {
                         <VStack space={3}>
                             <Text opacity={.5}>Recent Trips</Text>
                             <VStack>
-                                <Text fontSize={"lg"} bold>Beza Building</Text>
-                                <Text fontSize={"xs"} opacity={.5}>Cameron st. addidas abada 4526</Text>
+                                <HStack space={2} alignItems={"center"}>
+                                    <FontAwesome name="circle" size={18} color="green"/>
+                                    <Text fontSize={"lg"} bold>Beza Building</Text>
+                                </HStack>
+                                <Text ml={6} fontSize={"xs"} opacity={.5}>Cameron st. addidas abada 4526</Text>
                             </VStack>
                             <VStack>
-                                <Text fontSize={"lg"} bold>Akangkha Tower</Text>
-                                <Text fontSize={"xs"} opacity={.5}>Cameron st. addidas besides hostpital 5896</Text>
+                                <HStack space={2} alignItems={"center"}>
+                                    <FontAwesome name="circle" size={18} color="green"/>
+                                    <Text fontSize={"lg"} bold>Akangkha Tower</Text>
+                                </HStack>
+                                <Text ml={6} fontSize={"xs"} opacity={.5}>Cameron st. addidas besides hostpital
+                                    5896</Text>
                             </VStack>
                         </VStack>
                     </Box>
@@ -101,7 +108,7 @@ export function Main() {
 
                 {renderButtonCancelTrip()}
 
-                <VStack position={"absolute"} h={"35%"} left={2} right={2} bottom={2} space={3}>
+                <VStack position={"absolute"} h={"28%"} left={3} right={3} bottom={3} space={3}>
                     {renderOfferIfExist()}
                 </VStack>
             </Box>
