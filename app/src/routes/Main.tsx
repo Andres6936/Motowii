@@ -1,12 +1,11 @@
-import {Box, Button, HStack, IconButton, ScrollView, Stack, Text, VStack} from "native-base";
-import {FontAwesome, MaterialIcons} from '@expo/vector-icons';
+import {Box, Button, Divider, HStack, IconButton, Stack, Text, VStack} from "native-base";
+import {FontAwesome, Ionicons, MaterialIcons} from '@expo/vector-icons';
 import MapView from "react-native-maps";
 import React, {useState} from "react";
 import {DrawerActions, useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {RootParamList} from "../interfaces/RootParamList";
 import {FindService, IOffer} from "../FindService";
-import {Offer} from "../components/Offer";
 
 export function Main() {
     const navigator = useNavigation<NativeStackNavigationProp<RootParamList>>();
@@ -60,9 +59,38 @@ export function Main() {
         if (showOffers) {
             return (
                 <VStack position={"absolute"} h={"28%"} left={3} right={3} bottom={3} space={3}>
-                    <ScrollView>
-                        {offers.map(offer => <Offer key={offer.serial} offer={offer}/>)}
-                    </ScrollView>
+                    <Box p={3} borderRadius={8} bg={"gray.200"}>
+                        <VStack space={3}>
+                            <Text opacity={.5}>Select your car</Text>
+                            <HStack space={4} px={4}>
+                                <Ionicons name="ios-car" size={48} color="green"/>
+                                <VStack flex={1}>
+                                    <Text fontSize={"lg"}>Easy</Text>
+                                    <Text opacity={.5}>5 Min</Text>
+                                </VStack>
+                                <VStack flex={1}>
+                                    <Text textAlign={"right"} opacity={.5} strikeThrough>$70</Text>
+                                    <Text textAlign={"right"} color={"tertiary.600"} fontSize={"lg"} bold>$59</Text>
+                                </VStack>
+                            </HStack>
+
+                            <HStack space={4} px={4}>
+                                <Ionicons name="ios-car-sport" size={48} color="green"/>
+                                <VStack flex={1}>
+                                    <Text fontSize={"lg"}>XL</Text>
+                                    <Text opacity={.5}>3 Min</Text>
+                                </VStack>
+                                <VStack flex={1}>
+                                    <Text textAlign={"right"} opacity={.5} strikeThrough>$90</Text>
+                                    <Text textAlign={"right"} color={"tertiary.600"} fontSize={"lg"} bold>$80</Text>
+                                </VStack>
+                            </HStack>
+
+                            <Divider/>
+
+
+                        </VStack>
+                    </Box>
                 </VStack>
             )
         } else {
