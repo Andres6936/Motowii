@@ -1,4 +1,4 @@
-import {Box, Button, HStack, IconButton, Input, ScrollView, Stack, Text, VStack} from "native-base";
+import {Box, Button, IconButton, ScrollView, Stack, Text, VStack} from "native-base";
 import {MaterialIcons} from '@expo/vector-icons';
 import MapView from "react-native-maps";
 import React, {useState} from "react";
@@ -43,11 +43,15 @@ export function Main() {
     const renderButtonLoading = () => {
         if (isLoading) {
             return (
-                <Button size={"lg"} colorScheme={"tertiary"} disabled>Searching ....</Button>
+                <Button borderRadius={10} size={"lg"} colorScheme={"tertiary"} disabled>
+                    Searching ....
+                </Button>
             )
         } else {
             return (
-                <Button size={"lg"} colorScheme={"tertiary"} onPress={searchOffers}>Where you go?</Button>
+                <Button borderRadius={10} size={"lg"} colorScheme={"tertiary"} onPress={searchOffers}>
+                    Where you go?
+                </Button>
             )
         }
     }
@@ -63,25 +67,17 @@ export function Main() {
             return (
                 <>
                     <Box p={3} borderRadius={8} bg={"gray.200"}>
-                        <HStack space={3}>
-                            <Box flex={1} px={3} py={5} borderRadius={5} borderColor={"gray.500"} borderWidth={1}>
-                                <Text>Ride</Text>
-                            </Box>
-
-                            <Box flex={1} px={3} py={5} borderRadius={5} borderColor={"gray.500"} borderWidth={1}>
-                                <Text>Intercity</Text>
-                            </Box>
-
-                            <Box flex={1} px={3} py={5} borderRadius={5} borderColor={"gray.500"} borderWidth={1}>
-                                <Text>Courier</Text>
-                            </Box>
-
-                            <Box flex={1} px={3} py={5} borderRadius={5} borderColor={"gray.500"} borderWidth={1}>
-                                <Text>Fleet</Text>
-                            </Box>
-                        </HStack>
-                        <Input placeholder={"From"} variant={"rounded"}/>
-                        <Input placeholder={"To"} variant={"rounded"}/>
+                        <VStack space={3}>
+                            <Text opacity={.5}>Recent Trips</Text>
+                            <VStack>
+                                <Text fontSize={"lg"} bold>Beza Building</Text>
+                                <Text fontSize={"xs"} opacity={.5}>Cameron st. addidas abada 4526</Text>
+                            </VStack>
+                            <VStack>
+                                <Text fontSize={"lg"} bold>Akangkha Tower</Text>
+                                <Text fontSize={"xs"} opacity={.5}>Cameron st. addidas besides hostpital 5896</Text>
+                            </VStack>
+                        </VStack>
                     </Box>
 
                     {renderButtonLoading()}
