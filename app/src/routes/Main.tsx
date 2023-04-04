@@ -33,7 +33,7 @@ export function Main() {
         if (showOffers) {
             return (
                 <Button onPress={() => setShowOffers(false)} colorScheme={"secondary"}
-                        position={"absolute"} left={100} right={100} top={435}>
+                        position={"absolute"} left={100} right={100} bottom={240}>
                     Cancel Trip
                 </Button>
             )
@@ -103,7 +103,7 @@ export function Main() {
                             icon={<MaterialIcons name="dehaze" size={24} color="black"/>}/>
                 <IconButton bg={"white"} position={"absolute"} right={15} top={15}
                             icon={<MaterialIcons name="share" size={24} color="black"/>}/>
-                <IconButton bg={"white"} position={"absolute"} right={15} top={435}
+                <IconButton bg={"white"} position={"absolute"} right={15} bottom={240}
                             icon={<MaterialIcons name="location-searching" size={24} color="black"/>}/>
 
                 {renderButtonCancelTrip()}
