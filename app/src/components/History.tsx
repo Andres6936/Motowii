@@ -1,12 +1,12 @@
 import {Avatar, Divider, HStack, Text, VStack} from "native-base";
-import {FontAwesome, FontAwesome5, MaterialIcons} from "@expo/vector-icons";
+import {FontAwesome5, MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
 
 export function History() {
     return (
         <VStack mt={1} mb={2} bg={"gray.50"} py={3} px={5} borderRadius={5} borderColor={"gray.300"} borderWidth={1}>
             <VStack>
                 <HStack alignItems={"center"} space={3}>
-                    <FontAwesome name="circle" size={24} color="green"/>
+                    <MaterialCommunityIcons name="record-circle" size={24} color="green"/>
                     <VStack flex={1}>
                         <HStack justifyContent={"space-between"}>
                             <Text opacity={.5}>Pickup point</Text>
@@ -44,8 +44,8 @@ export function History() {
                     </Avatar>
                     <VStack>
                         <Text>Madhumd H</Text>
-                        <HStack space={2} alignItems={"center"}>
-                            <MaterialIcons name="star-rate" size={12} color="gold"/>
+                        <HStack space={1} alignItems={"center"}>
+                            <MaterialIcons name="star-rate" size={16} color="gold"/>
                             <Text opacity={.5}>(4.9)</Text>
                         </HStack>
                     </VStack>
