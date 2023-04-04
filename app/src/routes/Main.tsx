@@ -33,7 +33,7 @@ export function Main() {
         if (showOffers) {
             return (
                 <Button onPress={() => setShowOffers(false)} colorScheme={"secondary"}
-                        position={"absolute"} left={100} right={100} bottom={15}>
+                        position={"absolute"} left={100} right={100} top={435}>
                     Cancel Trip
                 </Button>
             )
@@ -93,20 +93,21 @@ export function Main() {
             <Box position={"relative"} flex={2}>
                 <MapView style={{width: "100%", height: "100%"}}/>
 
-                <IconButton bg={"white"} position={"absolute"} right={15} bottom={15}
-                            icon={<MaterialIcons name="location-searching" size={24} color="black"/>}/>
-                <IconButton bg={"white"} position={"absolute"} right={15} top={15}
-                            icon={<MaterialIcons name="share" size={24} color="black"/>}/>
                 <IconButton bg={"white"} position={"absolute"} left={15} top={15}
                             onPress={() => navigator.dispatch(DrawerActions.openDrawer())}
                             icon={<MaterialIcons name="dehaze" size={24} color="black"/>}/>
+                <IconButton bg={"white"} position={"absolute"} right={15} top={15}
+                            icon={<MaterialIcons name="share" size={24} color="black"/>}/>
+                <IconButton bg={"white"} position={"absolute"} right={15} top={435}
+                            icon={<MaterialIcons name="location-searching" size={24} color="black"/>}/>
 
                 {renderButtonCancelTrip()}
-            </Box>
 
-            <VStack space={3} bg={"gray.200"} p={3} flex={1}>
-                {renderOfferIfExist()}
-            </VStack>
+                <VStack position={"absolute"} borderRadius={8} h={"35%"} p={3}
+                        left={2} right={2} bottom={2} space={3} bg={"gray.200"}>
+                    {renderOfferIfExist()}
+                </VStack>
+            </Box>
         </Stack>
     )
 }
