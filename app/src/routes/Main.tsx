@@ -1,4 +1,4 @@
-import {Box, Button, Divider, HStack, IconButton, Stack, Text, VStack} from "native-base";
+import {Box, Button, Divider, HStack, IconButton, Select, Stack, Text, VStack} from "native-base";
 import {FontAwesome, Ionicons, MaterialIcons} from '@expo/vector-icons';
 import MapView from "react-native-maps";
 import React, {useState} from "react";
@@ -28,17 +28,6 @@ export function Main() {
         }
     }
 
-    const renderButtonCancelTrip = () => {
-        if (showOffers) {
-            return (
-                <Button onPress={() => setShowOffers(false)} colorScheme={"secondary"}
-                        position={"absolute"} left={100} right={100} bottom={240}>
-                    Cancel Trip
-                </Button>
-            )
-        }
-    }
-
     const renderButtonLoading = () => {
         if (isLoading) {
             return (
@@ -58,7 +47,7 @@ export function Main() {
     const renderOfferIfExist = () => {
         if (showOffers) {
             return (
-                <VStack position={"absolute"} h={"28%"} left={3} right={3} bottom={3} space={3}>
+                <VStack position={"absolute"} h={"39%"} left={3} right={3} bottom={3} space={3}>
                     <Box p={3} borderRadius={8} bg={"gray.200"}>
                         <VStack space={3}>
                             <Text opacity={.5}>Select your car</Text>
@@ -88,9 +77,16 @@ export function Main() {
 
                             <Divider/>
 
-
+                            <HStack space={2}>
+                                <Select flex={1} placeholder={"Cash"}/>
+                                <Select flex={1} placeholder={"Promo"}/>
+                            </HStack>
                         </VStack>
                     </Box>
+
+                    <Button borderRadius={10} size={"lg"} colorScheme={"tertiary"} onPress={searchOffers}>
+                        Lets Go
+                    </Button>
                 </VStack>
             )
         } else {
@@ -133,10 +129,9 @@ export function Main() {
                             icon={<MaterialIcons name="dehaze" size={24} color="black"/>}/>
                 <IconButton bg={"white"} position={"absolute"} right={15} top={15}
                             icon={<MaterialIcons name="share" size={24} color="black"/>}/>
-                <IconButton bg={"white"} position={"absolute"} right={15} bottom={240}
+                <IconButton bg={"white"} position={"absolute"} right={15} bottom={showOffers ? 330 : 240}
                             icon={<MaterialIcons name="location-searching" size={24} color="black"/>}/>
 
-                {renderButtonCancelTrip()}
                 {renderOfferIfExist()}
             </Box>
         </Stack>
