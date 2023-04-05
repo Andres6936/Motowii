@@ -18,11 +18,13 @@ with our motorcycle ride-sharing app
 
 ### Screenshots
 
-![Map](./app/docs/Map.jpg)
-![Select](./app/docs/Map-Select.jpg)
-![Payment](./app/docs/Payment.jpg)
-![History](./app/docs/History.jpg)
-![Lateral](./app/docs/Lateral.jpg)
+<p align="center">
+    <img width="320" height="568" src="./app/docs/Map.jpg" alt="Map">
+    <img width="320" height="568" src="./app/docs/Map-Select.jpg" alt="Map Select">
+    <img width="320" height="568" src="./app/docs/Payment.jpg" alt="Payment">
+    <img width="320" height="568" src="./app/docs/History.jpg" alt="History">
+    <img width="320" height="568" src="./app/docs/Lateral.jpg" alt="Lateral">
+</p>
 
 ## Inspiration
 
