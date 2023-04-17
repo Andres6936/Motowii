@@ -1,8 +1,8 @@
 // For minify the file for deploy in serveless see:
 // https://www.npmjs.com/package/@vercel/ncc
 
-import type {Event, Context, Response} from "./scaleway";
-import {ControllerMongo} from "./ControllerMongo";
+import type {Event, Context, Response} from "./src/types/scaleway";
+import {ControllerMongo} from "./src/controller/ControllerMongo";
 
 export interface Payload {
     TypeEvent: "CREATE_USER" | "READ_USER" | "UPDATE_USER" | "DELETE_USER",
