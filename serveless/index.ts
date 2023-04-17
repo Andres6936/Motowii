@@ -6,7 +6,9 @@ import {ControllerMongo} from "./ControllerMongo";
 
 export interface Payload {
     TypeEvent: "CREATE_USER" | "READ_USER" | "UPDATE_USER" | "DELETE_USER",
-    ScopeEvent: "CREATE" | "READ_ALL" | "READ_BY_ID" | "UPDATE_BY_ID" | "DELETE_BY_ID"
+    ScopeEvent: "CREATE" | "READ_ALL" | "READ_BY_ID" | "READ_BY_USERNAME" | "UPDATE_BY_ID" | "DELETE_BY_ID" | "DELETE_BY_USERNAME",
+    Id: string,
+    Username: string,
 }
 
 export async function handle(event: Event, context: Context): Promise<Response> {
@@ -26,10 +28,11 @@ export async function handle(event: Event, context: Context): Promise<Response> 
             body: response?.documents,
         })
     } else if (payload?.TypeEvent === "DELETE_USER") {
+        const response = await handleDelete(payload);
         return wrapperResponse({
             isBase64Encoded: false,
             statusCode: 200,
-            body: 'Not Implemented',
+            body: response,
         })
     } else if (payload?.TypeEvent === "UPDATE_USER") {
         return wrapperResponse({
@@ -61,9 +64,20 @@ function wrapperResponse(payload: Response): Response {
 async function handleRead(payload: Partial<Payload>) {
     if (payload?.ScopeEvent === "READ_ALL") {
         return await ControllerMongo.readAll();
+    } else if (payload?.ScopeEvent === "READ_BY_ID") {
+        return await ControllerMongo.readById(payload.Id);
+    } else if (payload?.ScopeEvent === "READ_BY_USERNAME") {
+        return  await ControllerMongo.readByUsername(payload.Username);
     }
 }
 
+async function handleDelete(payload: Partial<Payload>) {
+    if (payload?.ScopeEvent === "DELETE_BY_ID") {
+        return await ControllerMongo.deleteById(payload.Id);
+    } else if (payload?.ScopeEvent === "DELETE_BY_USERNAME") {
+        return await ControllerMongo.deleteByUsername(payload.Username)
+    }
+}
 
 // Handle Execution
 (async () => {

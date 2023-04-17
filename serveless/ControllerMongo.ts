@@ -74,7 +74,18 @@ export class ControllerMongo {
         });
     }
 
-    public static async readByUsername(username: string) {
+    public static async readById(id?: string) {
+        return await this.post("findOne", {
+            "collection": "Users",
+            "database": "Motowii",
+            "dataSource": "Motowii",
+            "filter": {
+                "_id": {"$oid": id}
+            }
+        });
+    }
+
+    public static async readByUsername(username?: string) {
         return await this.post("findOne", {
             "collection": "Users",
             "database": "Motowii",
@@ -85,7 +96,7 @@ export class ControllerMongo {
         });
     }
 
-    public static async updateById(id: string) {
+    public static async updateById(id?: string) {
         return await this.post("updateOne", {
             "collection": "Users",
             "database": "Motowii",
@@ -100,12 +111,21 @@ export class ControllerMongo {
         });
     }
 
-    public static async deleteById(id: string) {
+    public static async deleteById(id?: string) {
         return await this.post("deleteOne", {
             "collection": "Users",
             "database": "Motowii",
             "dataSource": "Motowii",
             "filter": {"_id": {"$oid": id}}
+        });
+    }
+
+    public static async deleteByUsername(username?: string) {
+        return await this.post("deleteOne", {
+            "collection": "Users",
+            "database": "Motowii",
+            "dataSource": "Motowii",
+            "filter": {"username": username}
         });
     }
 }
