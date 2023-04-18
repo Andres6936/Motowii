@@ -53,7 +53,7 @@ export interface ResponseAggregate<T> {
     documents: T[]
 }
 
-export type ReturnTypeMongoResponse<Action extends TypeAction, T> =
+export type ConditionalMongoResponse<Action extends TypeAction, T> =
     Action extends "findOne" ? ResponseFindOne<T> :
     Action extends "find" ? ResponseFind<T> :
     Action extends "insertOne" ? ResponseInsertOne :
