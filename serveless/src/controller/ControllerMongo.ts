@@ -9,10 +9,6 @@ interface User {
     email: string
 }
 
-interface ResponseMongo<T> {
-    documents?: T[]
-}
-
 export class ControllerMongo {
     private static readonly KEY = process.env.MONGO_DATA_API_KEY
     private static readonly HOSTNAME = 'data.mongodb-api.com'
