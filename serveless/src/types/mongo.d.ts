@@ -1,0 +1,11 @@
+export type TypeAction =
+    "findOne"
+    | "find"
+    | "insertOne"
+    | "insertMany"
+    | "updateOne"
+    | "updateMany"
+    | "replaceOne"
+    | "deleteOne"
+    | "deleteMany"
+    | "aggregate" 

@@ -1,5 +1,6 @@
-import type {IncomingMessage} from "http";
-import type {RequestOptions} from 'https'
+import type {TypeAction} from "../types/mongo";
+import type {IncomingMessage} from "node:http";
+import type {RequestOptions} from 'node:https'
 import * as https from 'node:https'
 
 interface User {
@@ -17,7 +18,7 @@ export class ControllerMongo {
     private static readonly HOSTNAME = 'data.mongodb-api.com'
     private static readonly PATHNAME = "/app/data-nhnyh/endpoint/data/v1/action/"
 
-    private static async post<T extends object>(action: string, data: T): Promise<ResponseMongo<object>> {
+    private static async post<T extends object>(action: TypeAction, data: T): Promise<ResponseMongo<object>> {
         return new Promise<ResponseMongo<object>>(async (resolve, reject) => {
             const options: RequestOptions = {
                 hostname: this.HOSTNAME,
@@ -53,7 +54,7 @@ export class ControllerMongo {
     }
 
     public static async create(user: User) {
-        return await this.post("inserOne", {
+        return await this.post("insertOne", {
             "collection": "Users",
             "database": "Motowii",
             "dataSource": "Motowii",
