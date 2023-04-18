@@ -7,12 +7,12 @@ import {ControllerMongo} from "./src/controller/ControllerMongo";
 export interface Payload {
     TypeEvent: "CREATE_USER" | "READ_USER" | "UPDATE_USER" | "DELETE_USER",
     ScopeEvent: "CREATE" | "READ_ALL" | "READ_BY_ID" | "READ_BY_USERNAME" | "UPDATE_BY_ID" | "DELETE_BY_ID" | "DELETE_BY_USERNAME",
-    Id: string,
-    Username: string,
+    Id?: string,
+    Username?: string,
 }
 
 export async function handle(event: Event, context: Context): Promise<Response> {
-    const payload = JSON.parse(event.body) as Partial<Payload>;
+    const payload = JSON.parse(event.body) as Payload;
 
     if (payload?.TypeEvent === "CREATE_USER") {
         return wrapperResponse({
