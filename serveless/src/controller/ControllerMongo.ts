@@ -9,6 +9,7 @@ import type {
 } from "../types/mongo";
 import type {IncomingMessage} from "node:http";
 import type {RequestOptions} from 'node:https'
+import type {Response} from "../types/scaleway";
 import * as https from 'node:https'
 
 interface User {
@@ -58,80 +59,171 @@ export class ControllerMongo {
         });
     }
 
-    public static async create(user: User): Promise<ResponseInsertOne> {
-        return await this.post("insertOne", {
-            "collection": "Users",
-            "database": "Motowii",
-            "dataSource": "Motowii",
-            "document": {
-                "email": user.email,
-                "username": user.username,
-                "password": user.password
-            }
-        });
-    }
-
-    public static async readAll(): Promise<ResponseFind<User>> {
-        return await this.post<object, User, "find">("find", {
-            "collection": "Users",
-            "database": "Motowii",
-            "dataSource": "Motowii",
-            "limit": 15,
-        });
-    }
-
-    public static async readById(id?: string): Promise<ResponseFindOne<User>> {
-        return await this.post<object, User, "findOne">("findOne", {
-            "collection": "Users",
-            "database": "Motowii",
-            "dataSource": "Motowii",
-            "filter": {
-                "_id": {"$oid": id}
-            }
-        });
-    }
-
-    public static async readByUsername(username?: string): Promise<ResponseFindOne<User>> {
-        return await this.post<object, User, "findOne">("findOne", {
-            "collection": "Users",
-            "database": "Motowii",
-            "dataSource": "Motowii",
-            "filter": {
-                "username": username
-            }
-        });
-    }
-
-    public static async updateById(id?: string): Promise<ResponseUpdateOne> {
-        return await this.post("updateOne", {
-            "collection": "Users",
-            "database": "Motowii",
-            "dataSource": "Motowii",
-            "filter": {"_id": {"$oid": id}},
-            "update": {
-                "$set": {
-                    "status": "complete",
-                    "completedAt": {"$date": {"$numberLong": "1637083942954"}}
+    public static async create(user: User): Promise<Response> {
+        try {
+            const response: ResponseInsertOne = await this.post("insertOne", {
+                "collection": "Users",
+                "database": "Motowii",
+                "dataSource": "Motowii",
+                "document": {
+                    "email": user.email,
+                    "username": user.username,
+                    "password": user.password
                 }
+            });
+            return {
+                isBase64Encoded: false,
+                statusCode: 200,
+                body: response,
             }
-        });
+        } catch (error) {
+            return {
+                isBase64Encoded: false,
+                statusCode: 500,
+                body: JSON.stringify(error),
+            }
+        }
     }
 
-    public static async deleteById(id?: string): Promise<ResponseDeleteOne> {
-        return await this.post("deleteOne", {
-            "collection": "Users",
-            "database": "Motowii",
-            "dataSource": "Motowii",
-            "filter": {"_id": {"$oid": id}}
-        });
+    public static async readAll(): Promise<Response> {
+        try {
+            const response: ResponseFind<User> = await this.post<object, User, "find">("find", {
+                "collection": "Users",
+                "database": "Motowii",
+                "dataSource": "Motowii",
+                "limit": 15,
+            });
+            return {
+                isBase64Encoded: false,
+                statusCode: 200,
+                body: response,
+            }
+        } catch (error) {
+            return {
+                isBase64Encoded: false,
+                statusCode: 500,
+                body: JSON.stringify(error),
+            }
+        }
     }
 
-    public static async deleteByUsername(username?: string): Promise<ResponseDeleteOne> {
-        return await this.post("deleteOne", {
-            "collection": "Users",
-            "database": "Motowii",
-            "dataSource": "Motowii",
-            "filter": {"username": username}
-        });
+    public static async readById(id?: string): Promise<Response> {
+        try {
+            const response: ResponseFindOne<User> = await this.post<object, User, "findOne">("findOne", {
+                "collection": "Users",
+                "database": "Motowii",
+                "dataSource": "Motowii",
+                "filter": {
+                    "_id": {"$oid": id}
+                }
+            });
+            return {
+                isBase64Encoded: false,
+                statusCode: 200,
+                body: response,
+            }
+        } catch (error) {
+            return {
+                isBase64Encoded: false,
+                statusCode: 500,
+                body: JSON.stringify(error),
+            }
+        }
+    }
+
+    public static async readByUsername(username?: string): Promise<Response> {
+        try {
+            const response: ResponseFindOne<User> = await this.post<object, User, "findOne">("findOne", {
+                "collection": "Users",
+                "database": "Motowii",
+                "dataSource": "Motowii",
+                "filter": {
+                    "username": username
+                }
+            });
+            return {
+                isBase64Encoded: false,
+                statusCode: 200,
+                body: response,
+            }
+        } catch (error) {
+            return {
+                isBase64Encoded: false,
+                statusCode: 500,
+                body: JSON.stringify(error),
+            }
+        }
+    }
+
+    public static async updateById(id?: string): Promise<Response> {
+        try {
+            const response: ResponseUpdateOne = await this.post("updateOne", {
+                "collection": "Users",
+                "database": "Motowii",
+                "dataSource": "Motowii",
+                "filter": {"_id": {"$oid": id}},
+                "update": {
+                    "$set": {
+                        "status": "complete",
+                        "completedAt": {"$date": {"$numberLong": "1637083942954"}}
+                    }
+                }
+            });
+            return {
+                isBase64Encoded: false,
+                statusCode: 200,
+                body: response,
+            }
+        } catch (error) {
+            return {
+                isBase64Encoded: false,
+                statusCode: 500,
+                body: JSON.stringify(error),
+            }
+        }
+    }
+
+    public static async deleteById(id?: string): Promise<Response> {
+        try {
+            const response: ResponseDeleteOne = await this.post("deleteOne", {
+                "collection": "Users",
+                "database": "Motowii",
+                "dataSource": "Motowii",
+                "filter": {"_id": {"$oid": id}}
+            });
+            return {
+                isBase64Encoded: false,
+                statusCode: 200,
+                body: response,
+            }
+        } catch (error) {
+            return {
+                isBase64Encoded: false,
+                statusCode: 500,
+                body: JSON.stringify(error),
+            }
+        }
+    }
+
+    public static async deleteByUsername(username?: string): Promise<Response> {
+        try {
+            const response: ResponseDeleteOne = await this.post("deleteOne", {
+                "collection": "Users",
+                "database": "Motowii",
+                "dataSource": "Motowii",
+                "filter": {"username": username}
+            });
+            return {
+                isBase64Encoded: false,
+                statusCode: 200,
+                body: response,
+            }
+        } catch (error) {
+            return {
+                isBase64Encoded: false,
+                statusCode: 500,
+                body: JSON.stringify(error),
+            }
+        }
     }
 }

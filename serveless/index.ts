@@ -21,19 +21,9 @@ export async function handle(event: Event, context: Context): Promise<Response> 
             body: 'Not Implemented',
         })
     } else if (payload?.TypeEvent === "READ_USER") {
-        const response = await handleRead(payload);
-        return wrapperResponse({
-            isBase64Encoded: false,
-            statusCode: 200,
-            body: response?.documents,
-        })
+        return await handleRead(payload);
     } else if (payload?.TypeEvent === "DELETE_USER") {
-        const response = await handleDelete(payload);
-        return wrapperResponse({
-            isBase64Encoded: false,
-            statusCode: 200,
-            body: response,
-        })
+        return await handleDelete(payload);
     } else if (payload?.TypeEvent === "UPDATE_USER") {
         return wrapperResponse({
             isBase64Encoded: false,
@@ -41,14 +31,14 @@ export async function handle(event: Event, context: Context): Promise<Response> 
             body: 'Not Implemented',
         })
     } else {
-        return wrapperResponse({
+        return {
             isBase64Encoded: false,
             body: {
                 context: context,
                 event: event,
             },
             statusCode: 200
-        })
+        }
     }
 }
 
@@ -61,21 +51,33 @@ function wrapperResponse(payload: Response): Response {
     }
 }
 
-async function handleRead(payload: Partial<Payload>) {
+async function handleRead(payload: Partial<Payload>): Promise<Response> {
     if (payload?.ScopeEvent === "READ_ALL") {
         return await ControllerMongo.readAll();
     } else if (payload?.ScopeEvent === "READ_BY_ID") {
         return await ControllerMongo.readById(payload.Id);
     } else if (payload?.ScopeEvent === "READ_BY_USERNAME") {
-        return  await ControllerMongo.readByUsername(payload.Username);
+        return await ControllerMongo.readByUsername(payload.Username);
+    } else {
+        return {
+            isBase64Encoded: false,
+            statusCode: 404,
+            body: "Not Scope Event"
+        }
     }
 }
 
-async function handleDelete(payload: Partial<Payload>) {
+async function handleDelete(payload: Partial<Payload>): Promise<Response> {
     if (payload?.ScopeEvent === "DELETE_BY_ID") {
         return await ControllerMongo.deleteById(payload.Id);
     } else if (payload?.ScopeEvent === "DELETE_BY_USERNAME") {
         return await ControllerMongo.deleteByUsername(payload.Username)
+    } else {
+        return {
+            isBase64Encoded: false,
+            statusCode: 404,
+            body: "Not Scope Event"
+        }
     }
 }
 
