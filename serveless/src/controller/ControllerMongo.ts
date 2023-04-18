@@ -1,4 +1,4 @@
-import type {TypeAction} from "../types/mongo";
+import type {ReturnTypeMongoResponse, TypeAction} from "../types/mongo";
 import type {IncomingMessage} from "node:http";
 import type {RequestOptions} from 'node:https'
 import * as https from 'node:https'
@@ -18,8 +18,8 @@ export class ControllerMongo {
     private static readonly HOSTNAME = 'data.mongodb-api.com'
     private static readonly PATHNAME = "/app/data-nhnyh/endpoint/data/v1/action/"
 
-    private static async post<T extends object>(action: TypeAction, data: T): Promise<ResponseMongo<object>> {
-        return new Promise<ResponseMongo<object>>(async (resolve, reject) => {
+    private static async post<Action extends TypeAction, T, R>(action: Action, data: T): Promise<ReturnTypeMongoResponse<Action, R>> {
+        return new Promise<ReturnTypeMongoResponse<Action, R>>(async (resolve, reject) => {
             const options: RequestOptions = {
                 hostname: this.HOSTNAME,
                 path: this.PATHNAME + action,
