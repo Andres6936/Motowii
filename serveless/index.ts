@@ -15,21 +15,17 @@ export async function handle(event: Event, context: Context): Promise<Response> 
     const payload = JSON.parse(event.body) as Payload;
 
     if (payload?.TypeEvent === "CREATE_USER") {
-        return wrapperResponse({
-            isBase64Encoded: false,
-            statusCode: 200,
-            body: 'Not Implemented',
-        })
+        return await handleCreate(payload);
+
     } else if (payload?.TypeEvent === "READ_USER") {
         return await handleRead(payload);
+
     } else if (payload?.TypeEvent === "DELETE_USER") {
         return await handleDelete(payload);
+
     } else if (payload?.TypeEvent === "UPDATE_USER") {
-        return wrapperResponse({
-            isBase64Encoded: false,
-            statusCode: 200,
-            body: 'Not Implemented',
-        })
+        return await handleUpdate(payload);
+
     } else {
         return {
             isBase64Encoded: false,
@@ -48,6 +44,22 @@ function wrapperResponse(payload: Response): Response {
         statusCode: payload.statusCode,
         headers: payload.headers ?? {},
         body: payload.body,
+    }
+}
+
+async function handleCreate(payload: Payload): Promise<Response> {
+    if (payload?.ScopeEvent === "CREATE") {
+        return await ControllerMongo.create({
+            username: payload.Username ?? "",
+            password: "",
+            email: "",
+        });
+    } else {
+        return {
+            isBase64Encoded: false,
+            statusCode: 404,
+            body: "Not Scope Event"
+        }
     }
 }
 
@@ -72,6 +84,18 @@ async function handleDelete(payload: Partial<Payload>): Promise<Response> {
         return await ControllerMongo.deleteById(payload.Id);
     } else if (payload?.ScopeEvent === "DELETE_BY_USERNAME") {
         return await ControllerMongo.deleteByUsername(payload.Username)
+    } else {
+        return {
+            isBase64Encoded: false,
+            statusCode: 404,
+            body: "Not Scope Event"
+        }
+    }
+}
+
+async function handleUpdate(payload: Payload): Promise<Response> {
+    if (payload?.ScopeEvent === "UPDATE_BY_ID") {
+        return await ControllerMongo.updateById(payload.Id);
     } else {
         return {
             isBase64Encoded: false,
