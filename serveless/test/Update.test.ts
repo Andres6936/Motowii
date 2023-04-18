@@ -1,4 +1,4 @@
-import type {Event, Context, Response} from "../scaleway";
+import type {Event, Context, Response} from "../src/types/scaleway";
 import {expect, test} from 'vitest'
 import {handle, Payload} from "../index";
 
