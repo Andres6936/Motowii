@@ -64,7 +64,7 @@ export class ControllerMongo {
     }
 
     public static async readAll() {
-        return await this.post("find", {
+        return await this.post<object, User, "find">("find", {
             "collection": "Users",
             "database": "Motowii",
             "dataSource": "Motowii",
@@ -73,7 +73,7 @@ export class ControllerMongo {
     }
 
     public static async readById(id?: string) {
-        return await this.post("findOne", {
+        return await this.post<object, User, "findOne">("findOne", {
             "collection": "Users",
             "database": "Motowii",
             "dataSource": "Motowii",
@@ -84,7 +84,7 @@ export class ControllerMongo {
     }
 
     public static async readByUsername(username?: string) {
-        return await this.post("findOne", {
+        return await this.post<object, User, "findOne">("findOne", {
             "collection": "Users",
             "database": "Motowii",
             "dataSource": "Motowii",
