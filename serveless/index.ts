@@ -66,10 +66,13 @@ async function handleCreate(payload: Payload): Promise<Response> {
 async function handleRead(payload: Partial<Payload>): Promise<Response> {
     if (payload?.ScopeEvent === "READ_ALL") {
         return await ControllerMongo.readAll();
+
     } else if (payload?.ScopeEvent === "READ_BY_ID") {
         return await ControllerMongo.readById(payload.Id);
+
     } else if (payload?.ScopeEvent === "READ_BY_USERNAME") {
         return await ControllerMongo.readByUsername(payload.Username);
+
     } else {
         return {
             isBase64Encoded: false,
@@ -82,8 +85,10 @@ async function handleRead(payload: Partial<Payload>): Promise<Response> {
 async function handleDelete(payload: Partial<Payload>): Promise<Response> {
     if (payload?.ScopeEvent === "DELETE_BY_ID") {
         return await ControllerMongo.deleteById(payload.Id);
+
     } else if (payload?.ScopeEvent === "DELETE_BY_USERNAME") {
-        return await ControllerMongo.deleteByUsername(payload.Username)
+        return await ControllerMongo.deleteByUsername(payload.Username);
+
     } else {
         return {
             isBase64Encoded: false,
@@ -96,6 +101,7 @@ async function handleDelete(payload: Partial<Payload>): Promise<Response> {
 async function handleUpdate(payload: Payload): Promise<Response> {
     if (payload?.ScopeEvent === "UPDATE_BY_ID") {
         return await ControllerMongo.updateById(payload.Id);
+        
     } else {
         return {
             isBase64Encoded: false,
