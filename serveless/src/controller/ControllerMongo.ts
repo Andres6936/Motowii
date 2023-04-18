@@ -1,4 +1,12 @@
-import type {ConditionalMongoResponse, TypeAction} from "../types/mongo";
+import type {
+    ConditionalMongoResponse,
+    ResponseDeleteOne,
+    ResponseFind,
+    ResponseFindOne,
+    ResponseInsertOne,
+    ResponseUpdateOne,
+    TypeAction
+} from "../types/mongo";
 import type {IncomingMessage} from "node:http";
 import type {RequestOptions} from 'node:https'
 import * as https from 'node:https'
@@ -50,7 +58,7 @@ export class ControllerMongo {
         });
     }
 
-    public static async create(user: User) {
+    public static async create(user: User): Promise<ResponseInsertOne> {
         return await this.post("insertOne", {
             "collection": "Users",
             "database": "Motowii",
@@ -63,7 +71,7 @@ export class ControllerMongo {
         });
     }
 
-    public static async readAll() {
+    public static async readAll(): Promise<ResponseFind<User>> {
         return await this.post<object, User, "find">("find", {
             "collection": "Users",
             "database": "Motowii",
@@ -72,7 +80,7 @@ export class ControllerMongo {
         });
     }
 
-    public static async readById(id?: string) {
+    public static async readById(id?: string): Promise<ResponseFindOne<User>> {
         return await this.post<object, User, "findOne">("findOne", {
             "collection": "Users",
             "database": "Motowii",
@@ -83,7 +91,7 @@ export class ControllerMongo {
         });
     }
 
-    public static async readByUsername(username?: string) {
+    public static async readByUsername(username?: string): Promise<ResponseFindOne<User>> {
         return await this.post<object, User, "findOne">("findOne", {
             "collection": "Users",
             "database": "Motowii",
@@ -94,7 +102,7 @@ export class ControllerMongo {
         });
     }
 
-    public static async updateById(id?: string) {
+    public static async updateById(id?: string): Promise<ResponseUpdateOne> {
         return await this.post("updateOne", {
             "collection": "Users",
             "database": "Motowii",
@@ -109,7 +117,7 @@ export class ControllerMongo {
         });
     }
 
-    public static async deleteById(id?: string) {
+    public static async deleteById(id?: string): Promise<ResponseDeleteOne> {
         return await this.post("deleteOne", {
             "collection": "Users",
             "database": "Motowii",
@@ -118,7 +126,7 @@ export class ControllerMongo {
         });
     }
 
-    public static async deleteByUsername(username?: string) {
+    public static async deleteByUsername(username?: string): Promise<ResponseDeleteOne> {
         return await this.post("deleteOne", {
             "collection": "Users",
             "database": "Motowii",
