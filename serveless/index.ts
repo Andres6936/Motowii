@@ -9,6 +9,8 @@ export interface Payload {
     ScopeEvent: "CREATE" | "READ_ALL" | "READ_BY_ID" | "READ_BY_USERNAME" | "UPDATE_BY_ID" | "DELETE_BY_ID" | "DELETE_BY_USERNAME",
     Id?: string,
     Username?: string,
+    Password?: string,
+    Email?: string,
 }
 
 export async function handle(event: Event, context: Context): Promise<Response> {
@@ -50,9 +52,9 @@ function wrapperResponse(payload: Response): Response {
 async function handleCreate(payload: Payload): Promise<Response> {
     if (payload?.ScopeEvent === "CREATE") {
         return await ControllerMongo.create({
-            username: payload.Username ?? "",
-            password: "",
-            email: "",
+            Username: payload.Username ?? "",
+            Password: payload.Password ?? "",
+            Email: payload.Email ?? "",
         });
     } else {
         return {

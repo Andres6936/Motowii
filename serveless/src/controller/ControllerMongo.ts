@@ -13,9 +13,9 @@ import type {Response} from "../types/scaleway";
 import * as https from 'node:https'
 
 interface User {
-    username: string,
-    password: string,
-    email: string
+    Username: string,
+    Password: string,
+    Email: string
 }
 
 export class ControllerMongo {
@@ -66,9 +66,9 @@ export class ControllerMongo {
                 "database": "Motowii",
                 "dataSource": "Motowii",
                 "document": {
-                    "email": user.email,
-                    "username": user.username,
-                    "password": user.password
+                    "Email": user.Email,
+                    "Username": user.Username,
+                    "Password": user.Password
                 }
             });
             return {
