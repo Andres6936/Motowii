@@ -40,15 +40,6 @@ export async function handle(event: Event, context: Context): Promise<Response> 
     }
 }
 
-function wrapperResponse(payload: Response): Response {
-    return {
-        isBase64Encoded: payload.isBase64Encoded,
-        statusCode: payload.statusCode,
-        headers: payload.headers ?? {},
-        body: payload.body,
-    }
-}
-
 async function handleCreate(payload: Payload): Promise<Response> {
     if (payload?.ScopeEvent === "CREATE") {
         return await ControllerMongo.create({
@@ -112,15 +103,3 @@ async function handleUpdate(payload: Payload): Promise<Response> {
         }
     }
 }
-
-// Handle Execution
-(async () => {
-    const response = await handle({
-        body: JSON.stringify({
-            TypeEvent: "READ_USER",
-            ScopeEvent: "READ_ALL"
-        } as Payload)
-    } as Event, {} as Context);
-
-    console.log('Response from Service: ', response)
-})();
