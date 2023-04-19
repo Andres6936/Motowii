@@ -15,6 +15,8 @@ describe('should be create, read, update and delete user', function() {
             } as Payload)
         } as Event, {} as Context);
 
-        expect(response.statusCode).toEqual(200);
+        expect(response).toHaveProperty("isBase64Encoded", false);
+        expect(response).toHaveProperty("statusCode", 200);
+        expect(response).toHaveProperty("body.insertedId");
     });
 });
