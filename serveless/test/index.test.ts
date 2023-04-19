@@ -3,9 +3,9 @@ import {expect, describe, it} from 'vitest'
 import {handle, Payload} from "../index";
 
 
-describe('should be create, read, update and delete user', function() {
-    it('should create the user', async function() {
-        const response: Response = await handle({
+describe('should be create, read, update and delete user', function () {
+    it('should create the user', async function () {
+        let response: Response = await handle({
             body: JSON.stringify({
                 TypeEvent: "CREATE_USER",
                 ScopeEvent: "CREATE",
@@ -18,5 +18,17 @@ describe('should be create, read, update and delete user', function() {
         expect(response).toHaveProperty("isBase64Encoded", false);
         expect(response).toHaveProperty("statusCode", 200);
         expect(response).toHaveProperty("body.insertedId");
+
+        response = await handle({
+            body: JSON.stringify({
+                TypeEvent: "READ_USER",
+                ScopeEvent: "READ_BY_USERNAME",
+                Username: "Adan",
+            } as Payload)
+        } as Event, {} as Context);
+
+        expect(response).toHaveProperty("isBase64Encoded", false);
+        expect(response).toHaveProperty("statusCode", 200);
+        expect(response).toHaveProperty("body.document");
     });
 });
